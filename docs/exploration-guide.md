@@ -10,15 +10,15 @@ This is a **read-only reference codebase** — there's no build system or test s
 
 ### Orientation
 
-| What | Where |
-|------|-------|
-| CLI entrypoint | `src/main.tsx` |
-| Core LLM engine | `src/QueryEngine.ts` (~46K lines) |
-| Tool definitions | `src/Tool.ts` (~29K lines) |
-| Command registry | `src/commands.ts` (~25K lines) |
-| Tool registry | `src/tools.ts` |
-| Context collection | `src/context.ts` |
-| All tool implementations | `src/tools/` (40 subdirectories) |
+| What                        | Where                                           |
+| --------------------------- | ----------------------------------------------- |
+| CLI entrypoint              | `src/main.tsx`                                  |
+| Core LLM engine             | `src/QueryEngine.ts` (~46K lines)               |
+| Tool definitions            | `src/Tool.ts` (~29K lines)                      |
+| Command registry            | `src/commands.ts` (~25K lines)                  |
+| Tool registry               | `src/tools.ts`                                  |
+| Context collection          | `src/context.ts`                                |
+| All tool implementations    | `src/tools/` (40 subdirectories)                |
 | All command implementations | `src/commands/` (~85 subdirectories + 15 files) |
 
 ---
@@ -33,6 +33,7 @@ This is a **read-only reference codebase** — there's no build system or test s
 4. System prompt contribution is in `prompt.ts`
 
 Example — understanding BashTool:
+
 ```
 src/tools/BashTool/
 ├── BashTool.ts      ← Core execution logic
@@ -48,19 +49,19 @@ src/tools/BashTool/
 
 ### "How does feature X work?"
 
-| Feature | Start Here |
-|---------|-----------|
-| Permissions | `src/hooks/toolPermission/` |
-| IDE bridge | `src/bridge/bridgeMain.ts` |
-| MCP client | `src/services/mcp/` |
-| Plugin system | `src/plugins/` + `src/services/plugins/` |
-| Skills | `src/skills/` |
-| Voice input | `src/voice/` + `src/services/voice.ts` |
-| Multi-agent | `src/coordinator/` |
-| Memory | `src/memdir/` |
-| Authentication | `src/services/oauth/` |
-| Config schemas | `src/schemas/` |
-| State management | `src/state/` |
+| Feature          | Start Here                               |
+| ---------------- | ---------------------------------------- |
+| Permissions      | `src/hooks/toolPermission/`              |
+| IDE bridge       | `src/bridge/bridgeMain.ts`               |
+| MCP client       | `src/services/mcp/`                      |
+| Plugin system    | `src/plugins/` + `src/services/plugins/` |
+| Skills           | `src/skills/`                            |
+| Voice input      | `src/voice/` + `src/services/voice.ts`   |
+| Multi-agent      | `src/coordinator/`                       |
+| Memory           | `src/memdir/`                            |
+| Authentication   | `src/services/oauth/`                    |
+| Config schemas   | `src/schemas/`                           |
+| State management | `src/state/`                             |
 
 ### "How does an API call flow?"
 
@@ -98,7 +99,7 @@ export const MyTool = buildTool({
 ### Feature Flag Gates
 
 ```typescript
-import { feature } from 'bun:bundle'
+import { feature } from 'bun:bundle';
 
 if (feature('VOICE_MODE')) {
   // This code is stripped at build time if VOICE_MODE is off
@@ -119,7 +120,7 @@ Most directories have an `index.ts` that re-exports the public API:
 
 ```typescript
 // src/tools/BashTool/index.ts
-export { BashTool } from './BashTool.js'
+export { BashTool } from './BashTool.js';
 ```
 
 ### Lazy Dynamic Imports
@@ -127,7 +128,7 @@ export { BashTool } from './BashTool.js'
 Heavy modules are loaded only when needed:
 
 ```typescript
-const { OpenTelemetry } = await import('./heavy-module.js')
+const { OpenTelemetry } = await import('./heavy-module.js');
 ```
 
 ### ESM with `.js` Extensions
@@ -135,7 +136,7 @@ const { OpenTelemetry } = await import('./heavy-module.js')
 Bun convention — all imports use `.js` extensions even for `.ts` files:
 
 ```typescript
-import { something } from './utils.js'  // Actually imports utils.ts
+import { something } from './utils.js'; // Actually imports utils.ts
 ```
 
 ---
@@ -144,13 +145,13 @@ import { something } from './utils.js'  // Actually imports utils.ts
 
 The largest files contain the most logic and are worth studying:
 
-| File | Lines | What's Inside |
-|------|-------|---------------|
-| `QueryEngine.ts` | ~46K | Streaming, tool loops, retries, token counting |
-| `Tool.ts` | ~29K | Tool types, `buildTool`, permission models |
-| `commands.ts` | ~25K | Command registry, conditional loading |
-| `main.tsx` | — | CLI parser, startup optimization |
-| `context.ts` | — | OS, shell, git, user context assembly |
+| File             | Lines | What's Inside                                  |
+| ---------------- | ----- | ---------------------------------------------- |
+| `QueryEngine.ts` | ~46K  | Streaming, tool loops, retries, token counting |
+| `Tool.ts`        | ~29K  | Tool types, `buildTool`, permission models     |
+| `commands.ts`    | ~25K  | Command registry, conditional loading          |
+| `main.tsx`       | —     | CLI parser, startup optimization               |
+| `context.ts`     | —     | OS, shell, git, user context assembly          |
 
 ---
 

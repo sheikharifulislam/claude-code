@@ -29,12 +29,12 @@ The CLI parser is built with [Commander.js](https://github.com/tj/commander.js) 
 
 ### 2. Initialization (`src/entrypoints/`)
 
-| File | Role |
-|------|------|
+| File      | Role                                                          |
+| --------- | ------------------------------------------------------------- |
 | `cli.tsx` | CLI session orchestration — the main path from launch to REPL |
-| `init.ts` | Config, telemetry, OAuth, MDM policy initialization |
-| `mcp.ts` | MCP server mode entrypoint (Claude Code as an MCP server) |
-| `sdk/` | Agent SDK — programmatic API for embedding Claude Code |
+| `init.ts` | Config, telemetry, OAuth, MDM policy initialization           |
+| `mcp.ts`  | MCP server mode entrypoint (Claude Code as an MCP server)     |
+| `sdk/`    | Agent SDK — programmatic API for embedding Claude Code        |
 
 Startup performs parallel initialization: MDM policy reads, Keychain prefetch, feature flag checks, then core init.
 
@@ -66,11 +66,11 @@ See [Tools Reference](tools.md) for the complete catalog.
 
 User-facing slash commands (`/commit`, `/review`, `/mcp`, etc.) that can be typed in the REPL. Three types:
 
-| Type | Description | Example |
-|------|-------------|---------|
-| **PromptCommand** | Sends a formatted prompt to the LLM with injected tools | `/review`, `/commit` |
-| **LocalCommand** | Runs in-process, returns plain text | `/cost`, `/version` |
-| **LocalJSXCommand** | Runs in-process, returns React JSX | `/doctor`, `/install` |
+| Type                | Description                                             | Example               |
+| ------------------- | ------------------------------------------------------- | --------------------- |
+| **PromptCommand**   | Sends a formatted prompt to the LLM with injected tools | `/review`, `/commit`  |
+| **LocalCommand**    | Runs in-process, returns plain text                     | `/cost`, `/version`   |
+| **LocalJSXCommand** | Runs in-process, returns React JSX                      | `/doctor`, `/install` |
 
 Commands are registered in `src/commands.ts` and invoked via `/command-name` in the REPL.
 
@@ -82,12 +82,12 @@ See [Commands Reference](commands.md) for the complete catalog.
 
 Claude Code uses a **React context + custom store** pattern:
 
-| Component | Location | Purpose |
-|-----------|----------|---------|
-| `AppState` | `src/state/AppStateStore.ts` | Global mutable state object |
-| Context Providers | `src/context/` | React context for notifications, stats, FPS |
-| Selectors | `src/state/` | Derived state functions |
-| Change Observers | `src/state/onChangeAppState.ts` | Side-effects on state changes |
+| Component         | Location                        | Purpose                                     |
+| ----------------- | ------------------------------- | ------------------------------------------- |
+| `AppState`        | `src/state/AppStateStore.ts`    | Global mutable state object                 |
+| Context Providers | `src/context/`                  | React context for notifications, stats, FPS |
+| Selectors         | `src/state/`                    | Derived state functions                     |
+| Change Observers  | `src/state/onChangeAppState.ts` | Side-effects on state changes               |
 
 The `AppState` object is passed into tool contexts, giving tools access to conversation history, settings, and runtime state.
 
@@ -106,11 +106,11 @@ The `AppState` object is passed into tool contexts, giving tools access to conve
 
 Full-screen UI modes:
 
-| Screen | Purpose |
-|--------|---------|
-| `REPL.tsx` | Main interactive REPL (the default screen) |
-| `Doctor.tsx` | Environment diagnostics (`/doctor`) |
-| `ResumeConversation.tsx` | Session restore (`/resume`) |
+| Screen                   | Purpose                                    |
+| ------------------------ | ------------------------------------------ |
+| `REPL.tsx`               | Main interactive REPL (the default screen) |
+| `Doctor.tsx`             | Environment diagnostics (`/doctor`)        |
+| `ResumeConversation.tsx` | Session restore (`/resume`)                |
 
 ### Hooks (`src/hooks/`, ~80 hooks)
 
@@ -155,27 +155,27 @@ Claude Code runs on [Bun](https://bun.sh) (not Node.js). Key implications:
 ### Feature Flags (Dead Code Elimination)
 
 ```typescript
-import { feature } from 'bun:bundle'
+import { feature } from 'bun:bundle';
 
 // Code inside inactive feature flags is completely stripped at build time
 if (feature('VOICE_MODE')) {
-  const voiceCommand = require('./commands/voice/index.js').default
+  const voiceCommand = require('./commands/voice/index.js').default;
 }
 ```
 
 Notable flags:
 
-| Flag | Feature |
-|------|---------|
-| `PROACTIVE` | Proactive agent mode (autonomous actions) |
-| `KAIROS` | Kairos subsystem |
-| `BRIDGE_MODE` | IDE bridge integration |
-| `DAEMON` | Background daemon mode |
-| `VOICE_MODE` | Voice input/output |
-| `AGENT_TRIGGERS` | Triggered agent actions |
-| `MONITOR_TOOL` | Monitoring tool |
-| `COORDINATOR_MODE` | Multi-agent coordinator |
-| `WORKFLOW_SCRIPTS` | Workflow automation scripts |
+| Flag               | Feature                                   |
+| ------------------ | ----------------------------------------- |
+| `PROACTIVE`        | Proactive agent mode (autonomous actions) |
+| `KAIROS`           | Kairos subsystem                          |
+| `BRIDGE_MODE`      | IDE bridge integration                    |
+| `DAEMON`           | Background daemon mode                    |
+| `VOICE_MODE`       | Voice input/output                        |
+| `AGENT_TRIGGERS`   | Triggered agent actions                   |
+| `MONITOR_TOOL`     | Monitoring tool                           |
+| `COORDINATOR_MODE` | Multi-agent coordinator                   |
+| `WORKFLOW_SCRIPTS` | Workflow automation scripts               |
 
 ### Lazy Loading
 

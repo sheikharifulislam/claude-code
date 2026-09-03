@@ -46,22 +46,22 @@ The bridge is a bidirectional communication layer connecting Claude Code's CLI w
 
 ### Key Files
 
-| File | Purpose |
-|------|---------|
-| `bridgeMain.ts` | Main bridge loop — starts the bidirectional channel |
-| `bridgeMessaging.ts` | Message protocol (serialize/deserialize) |
-| `bridgePermissionCallbacks.ts` | Routes permission prompts to the IDE |
-| `bridgeApi.ts` | API surface exposed to the IDE |
-| `bridgeConfig.ts` | Bridge configuration |
-| `replBridge.ts` | Connects the REPL session to the bridge |
-| `jwtUtils.ts` | JWT-based authentication between CLI and IDE |
-| `sessionRunner.ts` | Manages bridge session execution |
-| `createSession.ts` | Creates new bridge sessions |
-| `trustedDevice.ts` | Device trust verification |
-| `workSecret.ts` | Workspace-scoped secrets |
-| `inboundMessages.ts` | Handles messages coming from the IDE |
-| `inboundAttachments.ts` | Handles file attachments from the IDE |
-| `types.ts` | TypeScript types for the bridge protocol |
+| File                           | Purpose                                             |
+| ------------------------------ | --------------------------------------------------- |
+| `bridgeMain.ts`                | Main bridge loop — starts the bidirectional channel |
+| `bridgeMessaging.ts`           | Message protocol (serialize/deserialize)            |
+| `bridgePermissionCallbacks.ts` | Routes permission prompts to the IDE                |
+| `bridgeApi.ts`                 | API surface exposed to the IDE                      |
+| `bridgeConfig.ts`              | Bridge configuration                                |
+| `replBridge.ts`                | Connects the REPL session to the bridge             |
+| `jwtUtils.ts`                  | JWT-based authentication between CLI and IDE        |
+| `sessionRunner.ts`             | Manages bridge session execution                    |
+| `createSession.ts`             | Creates new bridge sessions                         |
+| `trustedDevice.ts`             | Device trust verification                           |
+| `workSecret.ts`                | Workspace-scoped secrets                            |
+| `inboundMessages.ts`           | Handles messages coming from the IDE                |
+| `inboundAttachments.ts`        | Handles file attachments from the IDE               |
+| `types.ts`                     | TypeScript types for the bridge protocol            |
 
 ### Feature Flag
 
@@ -89,13 +89,13 @@ When launched via `src/entrypoints/mcp.ts`, Claude Code exposes its own tools an
 
 ### Related Tools
 
-| Tool | Purpose |
-|------|---------|
-| `MCPTool` | Invoke tools on connected MCP servers |
-| `ListMcpResourcesTool` | List available MCP resources |
-| `ReadMcpResourceTool` | Read a specific MCP resource |
-| `McpAuthTool` | Authenticate with an MCP server |
-| `ToolSearchTool` | Discover deferred tools from MCP servers |
+| Tool                   | Purpose                                  |
+| ---------------------- | ---------------------------------------- |
+| `MCPTool`              | Invoke tools on connected MCP servers    |
+| `ListMcpResourcesTool` | List available MCP resources             |
+| `ReadMcpResourceTool`  | Read a specific MCP resource             |
+| `McpAuthTool`          | Authenticate with an MCP server          |
+| `ToolSearchTool`       | Discover deferred tools from MCP servers |
 
 ### Configuration
 
@@ -111,12 +111,12 @@ Every tool invocation passes through a centralized permission check before execu
 
 ### Permission Modes
 
-| Mode | Behavior |
-|------|----------|
-| `default` | Prompts the user for each potentially destructive operation |
-| `plan` | Shows the full execution plan, asks once for batch approval |
+| Mode                | Behavior                                                            |
+| ------------------- | ------------------------------------------------------------------- |
+| `default`           | Prompts the user for each potentially destructive operation         |
+| `plan`              | Shows the full execution plan, asks once for batch approval         |
 | `bypassPermissions` | Auto-approves all operations (dangerous — for trusted environments) |
-| `auto` | ML-based classifier automatically decides (experimental) |
+| `auto`              | ML-based classifier automatically decides (experimental)            |
 
 ### How It Works
 
@@ -138,12 +138,12 @@ FileRead(*)           # Allow reading any file
 
 ### Key Files
 
-| File | Path |
-|------|------|
-| Permission context | `src/hooks/toolPermission/PermissionContext.ts` |
-| Permission handlers | `src/hooks/toolPermission/handlers/` |
-| Permission logging | `src/hooks/toolPermission/permissionLogging.ts` |
-| Permission types | `src/types/permissions.ts` |
+| File                | Path                                            |
+| ------------------- | ----------------------------------------------- |
+| Permission context  | `src/hooks/toolPermission/PermissionContext.ts` |
+| Permission handlers | `src/hooks/toolPermission/handlers/`            |
+| Permission logging  | `src/hooks/toolPermission/permissionLogging.ts` |
+| Permission types    | `src/types/permissions.ts`                      |
 
 ---
 
@@ -155,12 +155,12 @@ Claude Code supports installable plugins that can extend its capabilities.
 
 ### Structure
 
-| Component | Location | Purpose |
-|-----------|----------|---------|
-| Plugin loader | `src/services/plugins/` | Discovers and loads plugins |
-| Built-in plugins | `src/plugins/builtinPlugins.ts` | Plugins that ship with Claude Code |
-| Bundled plugins | `src/plugins/bundled/` | Plugin code bundled into the binary |
-| Plugin types | `src/types/plugin.ts` | TypeScript types for plugin API |
+| Component        | Location                        | Purpose                             |
+| ---------------- | ------------------------------- | ----------------------------------- |
+| Plugin loader    | `src/services/plugins/`         | Discovers and loads plugins         |
+| Built-in plugins | `src/plugins/builtinPlugins.ts` | Plugins that ship with Claude Code  |
+| Bundled plugins  | `src/plugins/bundled/`          | Plugin code bundled into the binary |
+| Plugin types     | `src/types/plugin.ts`           | TypeScript types for plugin API     |
 
 ### Plugin Lifecycle
 
@@ -172,10 +172,10 @@ Claude Code supports installable plugins that can extend its capabilities.
 
 ### Related Commands
 
-| Command | Purpose |
-|---------|---------|
-| `/plugin` | Install, remove, or manage plugins |
-| `/reload-plugins` | Reload all installed plugins |
+| Command           | Purpose                            |
+| ----------------- | ---------------------------------- |
+| `/plugin`         | Install, remove, or manage plugins |
+| `/reload-plugins` | Reload all installed plugins       |
 
 ---
 
@@ -187,31 +187,31 @@ Skills are reusable, named workflows that bundle prompts and tool configurations
 
 ### Structure
 
-| Component | Location | Purpose |
-|-----------|----------|---------|
-| Bundled skills | `src/skills/bundled/` | Skills that ship with Claude Code |
-| Skill loader | `src/skills/loadSkillsDir.ts` | Loads skills from disk |
-| MCP skill builders | `src/skills/mcpSkillBuilders.ts` | Creates skills from MCP resources |
-| Skill registry | `src/skills/bundledSkills.ts` | Registration of all bundled skills |
+| Component          | Location                         | Purpose                            |
+| ------------------ | -------------------------------- | ---------------------------------- |
+| Bundled skills     | `src/skills/bundled/`            | Skills that ship with Claude Code  |
+| Skill loader       | `src/skills/loadSkillsDir.ts`    | Loads skills from disk             |
+| MCP skill builders | `src/skills/mcpSkillBuilders.ts` | Creates skills from MCP resources  |
+| Skill registry     | `src/skills/bundledSkills.ts`    | Registration of all bundled skills |
 
 ### Bundled Skills (16)
 
-| Skill | Purpose |
-|-------|---------|
-| `batch` | Batch operations across multiple files |
-| `claudeApi` | Direct Anthropic API interaction |
-| `claudeInChrome` | Chrome extension integration |
-| `debug` | Debugging workflows |
-| `keybindings` | Keybinding configuration |
-| `loop` | Iterative refinement loops |
-| `loremIpsum` | Generate placeholder text |
-| `remember` | Persist information to memory |
-| `scheduleRemoteAgents` | Schedule agents for remote execution |
-| `simplify` | Simplify complex code |
-| `skillify` | Create new skills from workflows |
-| `stuck` | Get unstuck when blocked |
-| `updateConfig` | Modify configuration programmatically |
-| `verify` / `verifyContent` | Verify code correctness |
+| Skill                      | Purpose                                |
+| -------------------------- | -------------------------------------- |
+| `batch`                    | Batch operations across multiple files |
+| `claudeApi`                | Direct Anthropic API interaction       |
+| `claudeInChrome`           | Chrome extension integration           |
+| `debug`                    | Debugging workflows                    |
+| `keybindings`              | Keybinding configuration               |
+| `loop`                     | Iterative refinement loops             |
+| `loremIpsum`               | Generate placeholder text              |
+| `remember`                 | Persist information to memory          |
+| `scheduleRemoteAgents`     | Schedule agents for remote execution   |
+| `simplify`                 | Simplify complex code                  |
+| `skillify`                 | Create new skills from workflows       |
+| `stuck`                    | Get unstuck when blocked               |
+| `updateConfig`             | Modify configuration programmatically  |
+| `verify` / `verifyContent` | Verify code correctness                |
 
 ### Execution
 
@@ -227,25 +227,25 @@ Manages background and parallel work items — shell tasks, agent tasks, and tea
 
 ### Task Types
 
-| Type | Location | Purpose |
-|------|----------|---------|
-| `LocalShellTask` | `LocalShellTask/` | Background shell command execution |
-| `LocalAgentTask` | `LocalAgentTask/` | Sub-agent running locally |
-| `RemoteAgentTask` | `RemoteAgentTask/` | Agent running on a remote machine |
-| `InProcessTeammateTask` | `InProcessTeammateTask/` | Parallel teammate agent |
-| `DreamTask` | `DreamTask/` | Background "dreaming" process |
-| `LocalMainSessionTask` | `LocalMainSessionTask.ts` | Main session as a task |
+| Type                    | Location                  | Purpose                            |
+| ----------------------- | ------------------------- | ---------------------------------- |
+| `LocalShellTask`        | `LocalShellTask/`         | Background shell command execution |
+| `LocalAgentTask`        | `LocalAgentTask/`         | Sub-agent running locally          |
+| `RemoteAgentTask`       | `RemoteAgentTask/`        | Agent running on a remote machine  |
+| `InProcessTeammateTask` | `InProcessTeammateTask/`  | Parallel teammate agent            |
+| `DreamTask`             | `DreamTask/`              | Background "dreaming" process      |
+| `LocalMainSessionTask`  | `LocalMainSessionTask.ts` | Main session as a task             |
 
 ### Task Tools
 
-| Tool | Purpose |
-|------|---------|
+| Tool             | Purpose                      |
+| ---------------- | ---------------------------- |
 | `TaskCreateTool` | Create a new background task |
-| `TaskUpdateTool` | Update task status |
-| `TaskGetTool` | Retrieve task details |
-| `TaskListTool` | List all tasks |
-| `TaskOutputTool` | Get task output |
-| `TaskStopTool` | Stop a running task |
+| `TaskUpdateTool` | Update task status           |
+| `TaskGetTool`    | Retrieve task details        |
+| `TaskListTool`   | List all tasks               |
+| `TaskOutputTool` | Get task output              |
+| `TaskStopTool`   | Stop a running task          |
 
 ---
 
@@ -257,12 +257,12 @@ Claude Code's persistent memory system, based on `CLAUDE.md` files.
 
 ### Memory Hierarchy
 
-| Scope | Location | Purpose |
-|-------|----------|---------|
-| Project memory | `CLAUDE.md` in project root | Project-specific facts, conventions |
-| User memory | `~/.claude/CLAUDE.md` | User preferences, cross-project |
-| Extracted memories | `src/services/extractMemories/` | Auto-extracted from conversations |
-| Team memory sync | `src/services/teamMemorySync/` | Shared team knowledge |
+| Scope              | Location                        | Purpose                             |
+| ------------------ | ------------------------------- | ----------------------------------- |
+| Project memory     | `CLAUDE.md` in project root     | Project-specific facts, conventions |
+| User memory        | `~/.claude/CLAUDE.md`           | User preferences, cross-project     |
+| Extracted memories | `src/services/extractMemories/` | Auto-extracted from conversations   |
+| Team memory sync   | `src/services/teamMemorySync/`  | Shared team knowledge               |
 
 ### Related
 
@@ -297,13 +297,13 @@ Voice input/output support for hands-free interaction.
 
 ### Components
 
-| File | Location | Purpose |
-|------|----------|---------|
-| Voice service | `src/services/voice.ts` | Core voice processing |
-| STT streaming | `src/services/voiceStreamSTT.ts` | Speech-to-text streaming |
-| Key terms | `src/services/voiceKeyterms.ts` | Domain-specific vocabulary |
-| Voice hooks | `src/hooks/useVoice.ts`, `useVoiceEnabled.ts`, `useVoiceIntegration.tsx` | React hooks |
-| Voice command | `src/commands/voice/` | `/voice` slash command |
+| File          | Location                                                                 | Purpose                    |
+| ------------- | ------------------------------------------------------------------------ | -------------------------- |
+| Voice service | `src/services/voice.ts`                                                  | Core voice processing      |
+| STT streaming | `src/services/voiceStreamSTT.ts`                                         | Speech-to-text streaming   |
+| Key terms     | `src/services/voiceKeyterms.ts`                                          | Domain-specific vocabulary |
+| Voice hooks   | `src/hooks/useVoice.ts`, `useVoiceEnabled.ts`, `useVoiceIntegration.tsx` | React hooks                |
+| Voice command | `src/commands/voice/`                                                    | `/voice` slash command     |
 
 Gated behind the `VOICE_MODE` feature flag.
 
@@ -315,26 +315,26 @@ Gated behind the `VOICE_MODE` feature flag.
 
 External integrations and shared services.
 
-| Service | Path | Purpose |
-|---------|------|---------|
-| **API** | `api/` | Anthropic SDK client, file uploads, bootstrap |
-| **MCP** | `mcp/` | MCP client connections and tool discovery |
-| **OAuth** | `oauth/` | OAuth 2.0 authentication flow |
-| **LSP** | `lsp/` | Language Server Protocol manager |
-| **Analytics** | `analytics/` | GrowthBook feature flags, telemetry |
-| **Plugins** | `plugins/` | Plugin loader and marketplace |
-| **Compact** | `compact/` | Conversation context compression |
-| **Policy Limits** | `policyLimits/` | Organization rate limits/quota |
-| **Remote Settings** | `remoteManagedSettings/` | Enterprise managed settings sync |
-| **Token Estimation** | `tokenEstimation.ts` | Token count estimation |
-| **Team Memory** | `teamMemorySync/` | Team knowledge synchronization |
-| **Tips** | `tips/` | Contextual usage tips |
-| **Agent Summary** | `AgentSummary/` | Agent work summaries |
-| **Prompt Suggestion** | `PromptSuggestion/` | Suggested follow-up prompts |
-| **Session Memory** | `SessionMemory/` | Session-level memory |
-| **Magic Docs** | `MagicDocs/` | Documentation generation |
-| **Auto Dream** | `autoDream/` | Background ideation |
-| **x402** | `x402/` | x402 payment protocol |
+| Service               | Path                     | Purpose                                       |
+| --------------------- | ------------------------ | --------------------------------------------- |
+| **API**               | `api/`                   | Anthropic SDK client, file uploads, bootstrap |
+| **MCP**               | `mcp/`                   | MCP client connections and tool discovery     |
+| **OAuth**             | `oauth/`                 | OAuth 2.0 authentication flow                 |
+| **LSP**               | `lsp/`                   | Language Server Protocol manager              |
+| **Analytics**         | `analytics/`             | GrowthBook feature flags, telemetry           |
+| **Plugins**           | `plugins/`               | Plugin loader and marketplace                 |
+| **Compact**           | `compact/`               | Conversation context compression              |
+| **Policy Limits**     | `policyLimits/`          | Organization rate limits/quota                |
+| **Remote Settings**   | `remoteManagedSettings/` | Enterprise managed settings sync              |
+| **Token Estimation**  | `tokenEstimation.ts`     | Token count estimation                        |
+| **Team Memory**       | `teamMemorySync/`        | Team knowledge synchronization                |
+| **Tips**              | `tips/`                  | Contextual usage tips                         |
+| **Agent Summary**     | `AgentSummary/`          | Agent work summaries                          |
+| **Prompt Suggestion** | `PromptSuggestion/`      | Suggested follow-up prompts                   |
+| **Session Memory**    | `SessionMemory/`         | Session-level memory                          |
+| **Magic Docs**        | `MagicDocs/`             | Documentation generation                      |
+| **Auto Dream**        | `autoDream/`             | Background ideation                           |
+| **x402**              | `x402/`                  | x402 payment protocol                         |
 
 ---
 

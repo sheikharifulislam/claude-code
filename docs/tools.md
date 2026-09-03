@@ -29,13 +29,25 @@ export const MyTool = buildTool({
   async call(args, context, canUseTool, parentMessage, onProgress) {
     // Execute and return { data: result, newMessages?: [...] }
   },
-  async checkPermissions(input, context) { /* Permission checks */ },
-  isConcurrencySafe(input) { /* Can run in parallel? */ },
-  isReadOnly(input) { /* Non-destructive? */ },
-  prompt(options) { /* System prompt injection */ },
-  renderToolUseMessage(input, options) { /* UI for invocation */ },
-  renderToolResultMessage(content, progressMessages, options) { /* UI for result */ },
-})
+  async checkPermissions(input, context) {
+    /* Permission checks */
+  },
+  isConcurrencySafe(input) {
+    /* Can run in parallel? */
+  },
+  isReadOnly(input) {
+    /* Non-destructive? */
+  },
+  prompt(options) {
+    /* System prompt injection */
+  },
+  renderToolUseMessage(input, options) {
+    /* UI for invocation */
+  },
+  renderToolResultMessage(content, progressMessages, options) {
+    /* UI for result */
+  },
+});
 ```
 
 **Directory structure per tool:**
@@ -52,88 +64,88 @@ src/tools/MyTool/
 
 ## File System Tools
 
-| Tool | Description | Read-Only |
-|------|-------------|-----------|
-| **FileReadTool** | Read file contents (text, images, PDFs, notebooks). Supports line ranges | Yes |
-| **FileWriteTool** | Create or overwrite files | No |
-| **FileEditTool** | Partial file modification via string replacement | No |
-| **GlobTool** | Find files matching glob patterns (e.g. `**/*.ts`) | Yes |
-| **GrepTool** | Content search using ripgrep (regex-capable) | Yes |
-| **NotebookEditTool** | Edit Jupyter notebook cells | No |
-| **TodoWriteTool** | Write to a structured todo/task file | No |
+| Tool                 | Description                                                              | Read-Only |
+| -------------------- | ------------------------------------------------------------------------ | --------- |
+| **FileReadTool**     | Read file contents (text, images, PDFs, notebooks). Supports line ranges | Yes       |
+| **FileWriteTool**    | Create or overwrite files                                                | No        |
+| **FileEditTool**     | Partial file modification via string replacement                         | No        |
+| **GlobTool**         | Find files matching glob patterns (e.g. `**/*.ts`)                       | Yes       |
+| **GrepTool**         | Content search using ripgrep (regex-capable)                             | Yes       |
+| **NotebookEditTool** | Edit Jupyter notebook cells                                              | No        |
+| **TodoWriteTool**    | Write to a structured todo/task file                                     | No        |
 
 ## Shell & Execution Tools
 
-| Tool | Description | Read-Only |
-|------|-------------|-----------|
-| **BashTool** | Execute shell commands in bash | No |
-| **PowerShellTool** | Execute PowerShell commands (Windows) | No |
-| **REPLTool** | Run code in a REPL session (Python, Node, etc.) | No |
+| Tool               | Description                                     | Read-Only |
+| ------------------ | ----------------------------------------------- | --------- |
+| **BashTool**       | Execute shell commands in bash                  | No        |
+| **PowerShellTool** | Execute PowerShell commands (Windows)           | No        |
+| **REPLTool**       | Run code in a REPL session (Python, Node, etc.) | No        |
 
 ## Agent & Orchestration Tools
 
-| Tool | Description | Read-Only |
-|------|-------------|-----------|
-| **AgentTool** | Spawn a sub-agent for complex tasks | No |
-| **SendMessageTool** | Send messages between agents | No |
-| **TeamCreateTool** | Create a team of parallel agents | No |
-| **TeamDeleteTool** | Remove a team agent | No |
-| **EnterPlanModeTool** | Switch to planning mode (no execution) | No |
-| **ExitPlanModeTool** | Exit planning mode, resume execution | No |
-| **EnterWorktreeTool** | Isolate work in a git worktree | No |
-| **ExitWorktreeTool** | Exit worktree isolation | No |
-| **SleepTool** | Pause execution (proactive mode) | Yes |
-| **SyntheticOutputTool** | Generate structured output | Yes |
+| Tool                    | Description                            | Read-Only |
+| ----------------------- | -------------------------------------- | --------- |
+| **AgentTool**           | Spawn a sub-agent for complex tasks    | No        |
+| **SendMessageTool**     | Send messages between agents           | No        |
+| **TeamCreateTool**      | Create a team of parallel agents       | No        |
+| **TeamDeleteTool**      | Remove a team agent                    | No        |
+| **EnterPlanModeTool**   | Switch to planning mode (no execution) | No        |
+| **ExitPlanModeTool**    | Exit planning mode, resume execution   | No        |
+| **EnterWorktreeTool**   | Isolate work in a git worktree         | No        |
+| **ExitWorktreeTool**    | Exit worktree isolation                | No        |
+| **SleepTool**           | Pause execution (proactive mode)       | Yes       |
+| **SyntheticOutputTool** | Generate structured output             | Yes       |
 
 ## Task Management Tools
 
-| Tool | Description | Read-Only |
-|------|-------------|-----------|
-| **TaskCreateTool** | Create a new background task | No |
-| **TaskUpdateTool** | Update a task's status or details | No |
-| **TaskGetTool** | Get details of a specific task | Yes |
-| **TaskListTool** | List all tasks | Yes |
-| **TaskOutputTool** | Get output from a completed task | Yes |
-| **TaskStopTool** | Stop a running task | No |
+| Tool               | Description                       | Read-Only |
+| ------------------ | --------------------------------- | --------- |
+| **TaskCreateTool** | Create a new background task      | No        |
+| **TaskUpdateTool** | Update a task's status or details | No        |
+| **TaskGetTool**    | Get details of a specific task    | Yes       |
+| **TaskListTool**   | List all tasks                    | Yes       |
+| **TaskOutputTool** | Get output from a completed task  | Yes       |
+| **TaskStopTool**   | Stop a running task               | No        |
 
 ## Web Tools
 
-| Tool | Description | Read-Only |
-|------|-------------|-----------|
-| **WebFetchTool** | Fetch content from a URL | Yes |
-| **WebSearchTool** | Search the web | Yes |
+| Tool              | Description              | Read-Only |
+| ----------------- | ------------------------ | --------- |
+| **WebFetchTool**  | Fetch content from a URL | Yes       |
+| **WebSearchTool** | Search the web           | Yes       |
 
 ## MCP (Model Context Protocol) Tools
 
-| Tool | Description | Read-Only |
-|------|-------------|-----------|
-| **MCPTool** | Invoke tools on connected MCP servers | Varies |
-| **ListMcpResourcesTool** | List resources exposed by MCP servers | Yes |
-| **ReadMcpResourceTool** | Read a specific MCP resource | Yes |
-| **McpAuthTool** | Handle MCP server authentication | No |
-| **ToolSearchTool** | Discover deferred/dynamic tools from MCP servers | Yes |
+| Tool                     | Description                                      | Read-Only |
+| ------------------------ | ------------------------------------------------ | --------- |
+| **MCPTool**              | Invoke tools on connected MCP servers            | Varies    |
+| **ListMcpResourcesTool** | List resources exposed by MCP servers            | Yes       |
+| **ReadMcpResourceTool**  | Read a specific MCP resource                     | Yes       |
+| **McpAuthTool**          | Handle MCP server authentication                 | No        |
+| **ToolSearchTool**       | Discover deferred/dynamic tools from MCP servers | Yes       |
 
 ## Integration Tools
 
-| Tool | Description | Read-Only |
-|------|-------------|-----------|
-| **LSPTool** | Language Server Protocol operations (go-to-definition, find references, etc.) | Yes |
-| **SkillTool** | Execute a registered skill | Varies |
+| Tool          | Description                                                                   | Read-Only |
+| ------------- | ----------------------------------------------------------------------------- | --------- |
+| **LSPTool**   | Language Server Protocol operations (go-to-definition, find references, etc.) | Yes       |
+| **SkillTool** | Execute a registered skill                                                    | Varies    |
 
 ## Scheduling & Triggers
 
-| Tool | Description | Read-Only |
-|------|-------------|-----------|
-| **ScheduleCronTool** | Create a scheduled cron trigger | No |
-| **RemoteTriggerTool** | Fire a remote trigger | No |
+| Tool                  | Description                     | Read-Only |
+| --------------------- | ------------------------------- | --------- |
+| **ScheduleCronTool**  | Create a scheduled cron trigger | No        |
+| **RemoteTriggerTool** | Fire a remote trigger           | No        |
 
 ## Utility Tools
 
-| Tool | Description | Read-Only |
-|------|-------------|-----------|
-| **AskUserQuestionTool** | Prompt the user for input during execution | Yes |
-| **BriefTool** | Generate a brief/summary | Yes |
-| **ConfigTool** | Read or modify Claude Code configuration | No |
+| Tool                    | Description                                | Read-Only |
+| ----------------------- | ------------------------------------------ | --------- |
+| **AskUserQuestionTool** | Prompt the user for input during execution | Yes       |
+| **BriefTool**           | Generate a brief/summary                   | Yes       |
+| **ConfigTool**          | Read or modify Claude Code configuration   | No        |
 
 ---
 
@@ -141,12 +153,12 @@ src/tools/MyTool/
 
 Every tool invocation passes through the permission system (`src/hooks/toolPermission/`). Permission modes:
 
-| Mode | Behavior |
-|------|----------|
-| `default` | Prompt the user for each potentially destructive operation |
-| `plan` | Show the full plan, ask once |
-| `bypassPermissions` | Auto-approve everything (dangerous) |
-| `auto` | ML-based classifier decides |
+| Mode                | Behavior                                                   |
+| ------------------- | ---------------------------------------------------------- |
+| `default`           | Prompt the user for each potentially destructive operation |
+| `plan`              | Show the full plan, ask once                               |
+| `bypassPermissions` | Auto-approve everything (dangerous)                        |
+| `auto`              | ML-based classifier decides                                |
 
 Permission rules use wildcard patterns:
 
